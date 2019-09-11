@@ -1,0 +1,24 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-heading {
+  border-top: 2px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+  // padding: 5px 0px;
+}
+
+.table-row {
+  border-bottom: 1px solid #dee2e6;
+  // padding: 4px 0px;
+}
+
+.row.sm-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  & > [class^="col-"],
+  & > [class*=" col-"] {
+    padding: 4.8px;
+  }
+}

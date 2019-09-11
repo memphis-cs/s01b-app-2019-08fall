@@ -1,0 +1,100 @@
+<%= form_with model: [question.quiz, question.becomes(Question)], id: "question-form" do |form| %>
+  <div class="form-row table-row sm-gutters flex-nowrap d-flex align-items-center">
+    <%= form.hidden_field :quiz_id, value: question.quiz_id %>
+
+    <div class="col-sm-2">
+      <% invalid = question.errors.include?(:type) %>
+      <div class="<%= 'has-danger' if invalid %>">
+        <%= form.select :type, [['Multiple Choice', 'MultipleChoiceQuestion'], ['Fill in the Blank', 'FillBlankQuestion']], {prompt: 'Choose...'}, {class: "custom-select #{'is-invalid' if invalid}", data: {element_id: 'question_type'}} %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% question.errors.full_messages_for(:type).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <% invalid = question.errors.include?(:question) %>
+      <div class="<%= 'has-danger' if invalid %>">
+        <%= form.text_area :question, rows: 1, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% question.errors.full_messages_for(:question).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <% invalid = question.errors.include?(:answer) %>
+      <div class="<%= 'has-danger' if invalid %>">
+        <%= form.text_area :answer, rows: 1, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% question.errors.full_messages_for(:answer).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <% invalid = question.errors.include?(:distractor_1) %>
+      <div class="type-forms <%= 'has-danger' if invalid %>" data-type-forms="MultipleChoiceQuestion">
+        <%= form.text_area :distractor_1, rows: 1, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% question.errors.full_messages_for(:distractor_1).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <% invalid = question.errors.include?(:distractor_2) %>
+      <div class="type-forms <%= 'has-danger' if invalid %>" data-type-forms="MultipleChoiceQuestion">
+        <%= form.text_area :distractor_2, rows: 1, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% question.errors.full_messages_for(:distractor_2).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-1">
+      <%= form.submit 'Save', class: 'btn btn-link p-0' %>
+      <button type="button" class="close text-danger" aria-label="Cancel">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+  </div>
+
+<% end %>
+
+<script>
+  $("select[data-element-id='question_type']").on('change', function() {
+    //console.log('Changed selection val');
+    var selection = $(this).val();
+    $('.type-forms').hide();
+    $('.type-forms input').attr('disabled', true);
+    if(selection != "") {
+      //console.log(selection);
+      $(`[data-type-forms="${selection}"]`).show();
+      $(`[data-type-forms="${selection}"] input`).attr('disabled', false);
+    }
+  }).change();
+
+  autosize($('textarea'));
+</script>

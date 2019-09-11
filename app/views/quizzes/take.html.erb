@@ -1,0 +1,17 @@
+<h1 class="text-center"><%= quiz.title %></h1>
+
+<div class="container">
+  <div class="row">
+    <% quiz.questions.each_with_index do |question, i| %>
+      <%= tag.div class: "col-sm-6", id: "question-#{question.id}" do %>
+        <%= render partial: "#{question.type.tableize}/answer", locals: { question: question, seed: rand(10), user_ans: nil, correct: nil } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="text-center pt-3">
+  <p>
+    <%= link_to 'Back', request.referer.present? ? request.referer : quiz_path(quiz) %>
+  </p>
+</div>

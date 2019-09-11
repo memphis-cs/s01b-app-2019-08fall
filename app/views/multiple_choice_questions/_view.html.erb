@@ -1,0 +1,26 @@
+<div class="col-sm-6">
+  <div class="card border-primary my-3" style="max-width: 20rem;">
+    <div class="card-header"><%= question.question %></div>
+    <div class="card-body">
+      <div class="form-group my-0">
+        <%
+        order = [question.answer, question.distractor_1]
+        order << question.distractor_2 unless question.distractor_2.empty?
+        order.each do |a|
+        %>
+          <div class="custom-control custom-radio">
+            <%= radio_button_tag "guess_#{question_counter ||= 0}", a, checked = a == question.answer, disabled: true, class: 'custom-control-input' %>
+            <%= label_tag "guess_#{a}", a, class: "custom-control-label #{'text-success' if a == question.answer}" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <% if request.path == multiple_choice_questions_path %>
+        <%= link_to 'Show', multiple_choice_question_path(question) %> | 
+      <% end %>
+      <%= link_to 'Edit', edit_multiple_choice_question_path(question) %>
+    </div>
+  </div>
+</div>

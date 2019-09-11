@@ -1,0 +1,9 @@
+$('#question-form').remove();
+$('.table-heading').after('<%= j render partial: "form_js", locals: { question: question } %>');
+$('#new-link').hide();
+$(".close").on("click", function() {
+  $('#question-form').remove();
+  $('#new-link').show();
+  $('#flash-messages').empty();
+});
+$('#flash-messages').html('<%= j render "shared/flash" %>');

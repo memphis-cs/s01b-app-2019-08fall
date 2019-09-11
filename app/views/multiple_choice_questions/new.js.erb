@@ -1,0 +1,5 @@
+$('#question-form').html('<%= j render partial: "form", locals: { question: question } %>');
+if ($('#new-link').is(":visible")) {
+  $('#new-link').hide();
+}
+$('#flash-messages').html('<%= j render "shared/flash" %>');

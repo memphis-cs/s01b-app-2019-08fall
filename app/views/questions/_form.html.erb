@@ -1,0 +1,92 @@
+<%= form_with model: question.becomes(Question) do |form| %>
+  <%= form.hidden_field :quiz_id, value: question.quiz_id %>
+
+  <fieldset class='custom-border' id='mc-only-fields'>
+    <legend class='custom-border'>Question</legend>
+    <% invalid = question.errors.include?(:question) %>
+    <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :question %>
+      <%= form.text_field :question, class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% question.errors.full_messages_for(:question).each do |error_message| %>
+            <%= error_message %>.
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% invalid = question.errors.include?(:answer) %>
+    <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :answer %>
+      <%= form.text_field :answer, class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% question.errors.full_messages_for(:answer).each do |error_message| %>
+            <%= error_message %>.
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <% invalid = question.errors.include?(:type) %>
+  <div class="form-group <%= 'has-danger' if invalid %>">
+    <%= form.label :type, class: 'pr-2' %>
+    <%= form.select :type, [['Multiple Choice', 'MultipleChoiceQuestion'], ['Fill in the Blank', 'FillBlankQuestion']], {prompt: 'Choose...'}, {class: "form-control #{'is-invalid' if invalid}", data: {element_id: 'question_type'}} %>
+    <% if invalid %>
+      <div class="invalid-feedback d-block">
+        <% question.errors.full_messages_for(:type).each do |error_message| %>
+          <%= error_message %>.
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <fieldset class='custom-border type-forms' id='MultipleChoiceQuestion'>
+    <legend class='custom-border'>Multiple Choice</legend>
+    <% invalid = question.errors.include?(:distractor_1) %>
+    <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :distractor_1 %>
+      <%= form.text_field :distractor_1, class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% question.errors.full_messages_for(:distractor_1).each do |error_message| %>
+            <%= error_message %>.
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% invalid = question.errors.include?(:distractor_2) %>
+    <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :distractor_2 %>
+      <%= form.text_field :distractor_2, class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% question.errors.full_messages_for(:distractor_2).each do |error_message| %>
+            <%= error_message %>.
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <%= form.submit 'Save Question', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script>
+  $("select[data-element-id='question_type']").on('change', function() {
+    console.log('Changed selection val');
+    var selection = $(this).val();
+    $('.type-forms').hide();
+    $('.type-forms input').attr('disabled', true);
+    if(selection != "") {
+      console.log(selection);
+      $(`#${selection}`).show();
+      $(`#${selection} input`).attr('disabled', false);
+    }
+  }).change();
+</script>

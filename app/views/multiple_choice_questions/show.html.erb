@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center">
+  <%= render partial: "view", locals: { question: question } %>
+</div>
+
+<div class="text-center pt-3">
+  <%= link_to "Back", request.referer.present? ? request.referer : multiple_choice_questions_path, class: "btn btn-primary btn-md" %>
+</div>

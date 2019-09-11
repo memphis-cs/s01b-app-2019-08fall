@@ -1,0 +1,7 @@
+<h1 class="text-center">New Quiz</h1>
+
+<%= render 'form', quiz: quiz %>
+
+<p>
+  <%= link_to 'Back', request.referer.present? ? request.referer : quizzes_path %>
+</p>

@@ -1,0 +1,11 @@
+<h1 class="text-center">Quizzes</h1>
+
+<% if user_signed_in? %>
+  <div class="text-center py-3">
+    <%= link_to 'Create New Quiz', new_quiz_path %>
+  </div>
+<% end %>
+
+<div class="list-group">
+  <%= render partial: "summary", collection: quizzes, as: :quiz %>
+</div>

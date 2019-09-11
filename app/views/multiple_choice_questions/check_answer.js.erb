@@ -1,0 +1,2 @@
+$('#question').html('<%= j render partial: "answer", locals: { question: question, seed: seed, user_ans: user_ans, correct: correct } %>');
+$('#flash-messages').html('<%= j render "shared/flash" %>');

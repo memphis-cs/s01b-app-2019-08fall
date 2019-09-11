@@ -1,0 +1,14 @@
+<% content_for :content do %>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="<%= content_for?(:col_width) ? yield(:col_width) : 'col-md-8' %>">
+        
+        <%= yield %>
+
+      </div>
+    </div>
+  </div>
+
+<% end %>
+<%= render template: "layouts/application" %>

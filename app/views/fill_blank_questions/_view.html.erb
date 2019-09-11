@@ -1,0 +1,16 @@
+<div class="col-sm-6">
+  <div class="card border-primary my-3" style="max-width: 20rem;">
+    <div class="card-header"><%= question.question %></div>
+    <div class="card-body">
+      <div class="form-group has-success my-0">
+        <%= text_field_tag "guess_#{question_counter ||= 0}", question.answer, disabled: true, class: 'form-control is-valid' %>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <% if request.path == fill_blank_questions_path %>
+        <%= link_to 'Show', fill_blank_question_path(question) %> | 
+      <% end %>
+      <%= link_to 'Edit', edit_fill_blank_question_path(question) %>
+    </div>
+  </div>
+</div>

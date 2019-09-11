@@ -1,0 +1,18 @@
+<h1 class="text-center">Fill in the Blank Questions</h1>
+
+<div class="text-center pt-3" id="new-link">
+  <%= link_to 'New Fill in the Blank Question', new_fill_blank_question_path, remote: true %>
+</div>
+
+<div class="w-75 mx-auto" id="question-form">
+</div>
+
+<div class="text-center pt-3">
+  <%= link_to 'Answer Random Question', random_fill_blank_question_path %>
+</div>
+
+<div class="container">
+  <div class="row" id="questions">
+    <%= render partial: "view", collection: questions, as: :question %>
+  </div>
+</div>

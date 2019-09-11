@@ -1,0 +1,29 @@
+<div class="card border-primary my-3" style="max-width: 20rem;">
+  <div class="card-header"><%= question.question %></div>
+  <div class="card-body">
+    <%= form_with do %>
+
+      <%= hidden_field_tag(:question_id, question.id) %>
+
+      <%= hidden_field_tag(:seed, seed) %>
+
+      <div class="form-group">
+      <%
+      order = [question.answer, question.distractor_1]
+      order << question.distractor_2 unless question.distractor_2.nil?
+      order.shuffle!(random: Random.new(seed))
+      order.each do |a|
+      %>
+        <div class="custom-control custom-radio mb-2">
+          <%= radio_button_tag "guess_#{question.id}", a, checked = user_ans == a, class: 'custom-control-input' %>
+          <%= label_tag "guess_#{question.id}_#{a}", a, class: "custom-control-label #{'text-success' if a == question.answer unless correct.nil?} #{'text-danger' if a == user_ans and not correct}" %>
+        </div>
+
+      <% end %>
+      </div>
+
+      <%= submit_tag("Submit Answer") %>
+
+    <% end %>
+  </div>
+</div>

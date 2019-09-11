@@ -1,0 +1,7 @@
+<h1 class="text-center">Edit Fill in the Blank Question</h1>
+
+<%= render 'form', question: question %>
+
+<p>
+  <%= link_to 'Back', request.referer.present? ? request.referer : fill_blank_questions_path %>
+</p>

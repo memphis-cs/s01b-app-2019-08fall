@@ -1,0 +1,8 @@
+<%= link_to quiz_path(quiz), { class: "list-group-item list-group-item-action flex-column align-items-start" } do %>
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1"><%= quiz.title %></h5>
+    <small><%= time_ago_in_words(quiz.created_at) %> ago</small>
+  </div>
+  <p class="mb-1"><%= quiz.description %></p>
+  <small><%= quiz.questions_count || 0 %> questions</small>
+<% end %>

@@ -1,0 +1,9 @@
+<h1 class="text-center">Answer This Question</h1>
+
+<div class="d-flex justify-content-center" id="question">
+  <%= render partial: "answer", locals: { question: question, seed: seed, user_ans: user_ans, correct: correct } %>
+</div>
+
+<div class="text-center pt-3">
+  <%= button_to "Next Question", random_multiple_choice_question_path, method: :get, class: "btn btn-primary btn-md" %>
+</div>

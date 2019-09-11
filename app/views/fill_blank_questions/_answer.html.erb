@@ -1,0 +1,17 @@
+<div class="card border-primary my-3" style="max-width: 20rem;">
+  <div class="card-header"><%= question.question %></div>
+  <div class="card-body">
+    <%= form_with do %>
+
+      <%= hidden_field_tag(:question_id, question.id) %>
+
+      <div class="form-group <%= (correct ? 'has-success' : 'has-danger') unless correct.nil? %>">
+          <%= text_field_tag "guess_#{question.id}", user_ans || nil, class: "form-control #{(correct ? 'is-valid' : 'is-invalid') unless correct.nil? }" %>
+          <div class="invalid-feedback">Close! Check your answer again.</div>
+      </div>
+
+      <%= submit_tag("Submit Answer") %>
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<%= form_with model: quiz, local: true do |form| %>
+  <%= form.hidden_field :user_id, value: quiz.user_id %>
+
+  <% invalid = quiz.errors.include?(:title) %>
+  <div class="form-group <%= 'has-danger' if invalid %>">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control #{'is-invalid' if invalid}" %>
+    <% if invalid %>
+      <div class="invalid-feedback d-block">
+        <% quiz.errors.full_messages_for(:title).each do |error_message| %>
+          <%= error_message %>.
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% invalid = quiz.errors.include?(:description) %>
+  <div class="form-group <%= 'has-danger' if invalid %>">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: "form-control #{'is-invalid' if invalid}" %>
+    <% if invalid %>
+      <div class="invalid-feedback d-block">
+        <% quiz.errors.full_messages_for(:description).each do |error_message| %>
+          <%= error_message %>.
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save Quiz', class: 'btn btn-primary' %>
+  </div>
+<% end %>

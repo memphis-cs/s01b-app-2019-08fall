@@ -1,0 +1,2 @@
+$('#question-<%= question.id %>').html('<%= j render partial: "#{question.type.tableize}/answer", locals: { question: question, seed: seed, user_ans: user_ans, correct: correct } %>');
+$('#flash-messages').html('<%= j render "shared/flash" %>');

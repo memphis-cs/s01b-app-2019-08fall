@@ -1,0 +1,41 @@
+<h1 class="text-center"><%= quiz.title %></h1>
+
+<div class="text-center text-muted">
+  <p><%= quiz.description %></p>
+</div>
+
+<div class="text-center">
+  <% if quiz.user == current_user %>
+    <%= link_to 'Edit Quiz', edit_quiz_path(quiz) %><br>
+  <% end %>
+  <%= link_to 'Take Quiz', take_quiz_path(quiz) %><br><br>
+  <%= link_to 'Show Questions', "", id: "show-questions" %>
+  <%= link_to 'Hide Questions', "", id: "hide-questions" %>
+</div>
+
+<div class="container" id="quiz-questions">
+  <div class="row">
+    <% quiz.questions.each_with_index do |question, i| %>
+      <%= render partial: "#{question.type.tableize}/view", locals: { question: question, question_counter: i } %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).one("turbolinks:load", function() {
+    $('#quiz-questions').hide();
+    $('#hide-questions').hide();
+  });
+  $('#show-questions').on("click", function() {
+    $('#show-questions').toggle();
+    $('#hide-questions').toggle();
+    $('#quiz-questions').toggle();
+    return false;
+  });
+  $('#hide-questions').on("click", function() {
+    $('#show-questions').toggle();
+    $('#hide-questions').toggle();
+    $('#quiz-questions').toggle();
+    return false;
+  });
+</script>

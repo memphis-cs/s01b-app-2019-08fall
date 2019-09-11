@@ -1,0 +1,11 @@
+<tr id="show-question-<%= question.id %>">
+  <td><%= question.class.name.underscore.humanize.titleize %></td>
+  <td><%= question.question %></td>
+  <td><%= question.answer %></td>
+  <td><%= question.distractor_1 %></td>
+  <td><%= question.distractor_2 %></td>
+  <td>
+    <%= link_to 'Edit', edit_quiz_question_path(question.quiz, question), remote: true %>
+    <%= link_to 'Destroy', quiz_question_path(question.quiz, question), method: :delete, data: {confirm: 'Are you sure?'}, remote: true %>
+  </td>
+</tr>

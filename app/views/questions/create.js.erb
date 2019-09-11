@@ -1,0 +1,4 @@
+$('#questions-table').prepend('<%= j render partial: "div_table_row", locals: { question: question } %>');
+$('#new-link').show();
+$('#question-form').remove();
+$('#flash-messages').html('<%= j render "shared/flash" %>');

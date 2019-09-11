@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: quizzes
+#
+#  id              :bigint           not null, primary key
+#  description     :text
+#  questions_count :integer
+#  title           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  user_id         :bigint
+#
+# Indexes
+#
+#  index_quizzes_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: COMP 4081 Basic Concepts
+  description: Covers Vagrant virtual machine usage commands and basic MVC architecture.
+  user: one
+
+two:
+  title: Git and Github
+  description: Covers Git and Github concepts.
+  user: two

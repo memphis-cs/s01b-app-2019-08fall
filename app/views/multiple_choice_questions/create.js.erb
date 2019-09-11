@@ -1,0 +1,4 @@
+$('#question-form').empty();
+$('#new-link').show();
+$('#questions').prepend('<%= j render partial: "view", locals: { question: question } %>');
+$('#flash-messages').html('<%= j render "shared/flash" %>');

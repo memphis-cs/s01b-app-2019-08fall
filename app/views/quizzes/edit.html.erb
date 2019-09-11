@@ -1,0 +1,42 @@
+<% content_for :col_width do %>
+  col-md-10
+<% end %>
+
+<h1 class="text-center">Edit Quiz</h1>
+
+<%= render 'form', quiz: quiz %>
+
+<h2 class="pt-4">Quiz Questions</h2>
+
+<div class="w-100 pb-4">
+  <div class="row font-weight-bold table-heading align-bottom sm-gutters flex-nowrap">
+    <div class="col-sm-2">
+      Type
+    </div>
+    <div class="col-sm-4">
+      Question
+    </div>
+    <div class="col-sm">
+      Answer
+    </div>
+    <div class="col-sm">
+      Distractor 1
+    </div>
+    <div class="col-sm">
+      Distractor 2
+    </div>
+    <div class="col-sm-1">
+    </div>    
+  </div>
+  <div id="questions-table">
+    <%= render partial: "questions/div_table_row", collection: quiz.questions, as: :question %>
+  </div>
+</div>
+
+<p id="new-link">
+  <%= link_to 'New Question', new_quiz_question_path(quiz_id: quiz.id), remote: true %>
+</p>
+
+<p>
+  <%= link_to 'Back', request.referer.present? ? request.referer : quizzes_path %>
+</p>
